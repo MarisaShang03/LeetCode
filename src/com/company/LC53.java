@@ -1,7 +1,7 @@
 package com.company;
 
 import java.util.Arrays;
-
+//For LC
 public class LC53 {
 //    public int maxSubArray(int[] nums) {
 //        // Initialize our variables using the first element.
