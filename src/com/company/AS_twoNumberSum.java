@@ -12,6 +12,7 @@ public class AS_twoNumberSum {
                 //以下两行可以变成return new int[] {a,b}
                 int[] result={a,b};
                 return result;
+
             }else{
                 set.add(a);
             }
