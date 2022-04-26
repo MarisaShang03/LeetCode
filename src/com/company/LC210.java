@@ -9,7 +9,10 @@ Time complexity is O(V+E). When we construct the hashmap,the time complexity is 
 if the graph is a DAG, we traverse only once for each node and each vertex in the graph. so time complexity is O(V+E).
 Thus, the overall time complexity is O(V+E)
 Space complexity
-When we initiate the adjacency list, the space
+When we initiate the adjacency list, we created the hashmap with each node as the key, and each adjacent edge as the value.
+the space complexity of adjacency list is O(V)
+When we recursively call dfs, the worst case we need space of O(E)
+Thus the overall space complexity is O(V+E)
  */
 public class LC210 {
     //we declare three static variable to trace the status of each node
