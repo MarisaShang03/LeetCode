@@ -1,7 +1,13 @@
 package com.company;
-
 import java.util.Arrays;
 
+/*
+Bellman Ford algorithm time complexity
+Initialization takes O(V)
+Relaxation steps takes O(E*V), because for each edge, we do relaxation V-1 times.
+Check negative cycle takes O(E)
+Overall time complexity is O(E*V)
+ */
 public class BellmanFord {
     /*
     This function uses Bellman-Ford's algorithm to find the single source shortest path.
@@ -11,6 +17,7 @@ public class BellmanFord {
     Parameter numVertex is the total number of vertex
     Parameter E is the number of edges?
     Parameter source is the start vertex
+
      */
     static void BellmanFord(int graph[][], int numVertex, int E,
                             int source) {
@@ -20,10 +27,6 @@ public class BellmanFord {
         Arrays.fill(distance,Integer.MAX_VALUE);
         // distance of source as 0
         distance[source] = 0;
-
-        // Relax all edges |numVertex| - 1 times. A simple
-        // shortest path from source to any other
-        // vertex can have at-most |numVertex| - 1 edges
 
         //relaxation steps. relax all edges numVertex -1 times
         for (int i = 0; i < numVertex - 1; i++) {
@@ -39,44 +42,79 @@ public class BellmanFord {
         // To check for negative-weight cycles, run relaxation step one more time
         //for each edge in graph[[u,v,w]], check if distance[v] is greater than distance[u]+weight
         //if greater, there is a negative cycle
-
-//        for (int i = 0; i < E; i++)
-//        {
-//            int x = graph[i][0];
-//            int y = graph[i][1];
-//            int weight = graph[i][2];
-//            if (distance[x] != Integer.MAX_VALUE &&
-//                    distance[x] + weight < distance[y])
-//                System.out.println("Graph contains negative"
-//                        +" weight cycle");
-//        }
-
         for(int[] currentEdge: graph){
                 if(distance[currentEdge[0]]!= Integer.MAX_VALUE && distance[currentEdge[0]] + currentEdge[2] < distance[currentEdge[1]]){
                     System.out.println("We found negative cycle. There is no shortest distance");
+                    return;
                 }
         }
 
         System.out.println("The distance from vertex "+source+" is:" );
-        for (int i = 0; i < numVertex; i++)
-            System.out.println(i + "\t\t" + distance[i]);
+        for (int i = 0; i < numVertex; i++) {
+            if (distance[i] == Integer.MAX_VALUE) {
+                System.out.println("The distance from vertex " + source + " to vertex " + i + " is infinity");
+            } else {
+                System.out.println("The distance from vertex " + source + " to vertex " + i + "\t" + distance[i]);
+                //System.out.println(i + "\t\t" + distance[i]);
+            }
+        }
     }
 
-    // Driver code
-    public static void main(String[] args)
-    {
-        int V = 5; // Number of vertices in graph
-        int E = 8; // Number of edges in graph
-
-        // Every edge has three values (u, v, w) where
-        // the edge is from vertex u to v. And weight
-        // of the edge is w.
-        int graph[][] = { { 0, 1, -1 }, { 0, 2, 4 },
-                { 1, 2, 3 }, { 1, 3, 2 },
-                { 1, 4, 2 }, { 3, 2, 5 },
-                { 3, 1, 1 }, { 4, 3, -3 } };
-
-        BellmanFord(graph, V, E, 0);
+    public static void main(String[] args) {
+        //graph is problem 4.c
+        //for each edge in graph[[u,v,w]],the graph has one edge from vertex u to vertex v with weight w
+        int graph[][] = {{0,2,3},{0,3,5},{0,5,2},
+                {1,2,-4},
+                {2,7,4},
+                {3,4,6},
+                {4,3,-3},{4,7,8},
+                {5,6,3},
+                {6,5,-6}, {6,7,7}
+        };
+        int numVertex = 8; // Number of vertices in graph
+        int numEdge = graph.length; // Number of edges in graph
+        BellmanFord(graph, numVertex, numEdge, 0);
     }
+
 }
 
+//graph is problem 4.a
+//for each edge in graph[[u,v,w]],the graph has one edge from vertex u to vertex v with weight w
+//        int graph[][] = {{0, 1, 1}, {0, 4, 4}, {0, 5, 8},
+//                {1,2,2}, {1,6,6},{1,5,6},
+//                {2,3,1}, {2,6,2},
+//                {3,7,4},{3,6,1},
+//                {4,5,5},
+//                {6,7,1},{6,5,1}
+//        };
+//        int numVertex = 8; // Number of vertices in graph
+//        int numEdge = graph.length; // Number of edges in graph
+//        BellmanFord(graph, numVertex, numEdge, 0);
+
+
+//graph is problem 4.b
+//for each edge in graph[[u,v,w]],the graph has one edge from vertex u to vertex v with weight w
+//    int graph[][] = {{0,1,10}, {0,7,8},
+//            {1,5,2},
+//            {2,3,1},{2,1,1},
+//            {3,4,3},
+//            {4,5,-1},
+//            {5,2,-2},
+//            {6,5,-1}, {6,1,-4},
+//            {7,6,1}
+//    };
+//    int numVertex = 8; // Number of vertices in graph
+//    int numEdge = graph.length; // Number of edges in graph
+//    BellmanFord(graph, numVertex, numEdge, 0);
+
+    //graph is problem 4.c
+    //for each edge in graph[[u,v,w]],the graph has one edge from vertex u to vertex v with weight w
+//    int graph[][] = {{0,1,2},{0,3,7},
+//            {1,2,5},{1,3,8}, {1,4,-4},
+//            {2,1,-2},
+//            {3,2,-3}, {3,4,9},
+//            {4,2,7},{4,0,2}
+//    };
+//    int numVertex = 5; // Number of vertices in graph
+//    int numEdge = graph.length; // Number of edges in graph
+//    BellmanFord(graph, numVertex, numEdge, 0);

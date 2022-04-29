@@ -132,3 +132,20 @@ public class Graph {
         graph.BellmanFord(graph, 0);
     }
 }
+
+//// test
+//public static void main2(String[] args)
+//{
+//    int V = 5; // Number of vertices in graph
+//    int E = 8; // Number of edges in graph
+//
+//    // Every edge has three values (u, v, w) where
+//    // the edge is from vertex u to v. And weight
+//    // of the edge is w.
+//    int graph[][] = { { 0, 1, -1 }, { 0, 2, 4 },
+//            { 1, 2, 3 }, { 1, 3, 2 },
+//            { 1, 4, 2 }, { 3, 2, 5 },
+//            { 3, 1, 1 }, { 4, 3, -3 } };
+//
+//    BellmanFord(graph, V, E, 0);
+//}
