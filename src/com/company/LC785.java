@@ -4,6 +4,30 @@ import java.util.Arrays;
 import java.util.Stack;
 
 public class LC785 {
+
+    public boolean isBipartite2(int[][] graph) {
+        int color[] =new int[graph.length];
+        for(int i=0;i<graph.length;i++){
+            if(color[i] ==0){
+                Queue<Integer> queue =new PriorityQueue<Integer>();
+                queue.offer(i);
+                color[i]=1;
+                while(!queue.isEmpty()){
+                    int cur =(int) queue.poll();
+                    for(int adjIndex : graph[cur]){
+                        if(color[adjIndex] == 0){
+                            color[adjIndex] = color[cur] ==1 ?2:1;
+                            queue.offer(adjIndex);
+                        }else if(color[adjIndex] == color[cur]){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean isBipartite(int[][] graph) {
         int len = graph.length;
         int[] color = new int[len];
